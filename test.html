@@ -1,0 +1,43 @@
+<div class="col-md-4">
+    <div class="quiz-card">
+        <h3>{{$quizzes->title}}</h3>
+        <p title="{{$quizzes->description}}">
+            {{$quizzes->description}}
+        </p>
+        <div class="row">
+            <div class="col-xs-6 pad-0">
+                <ul class="topic-detail">
+                    <li>Per Question Mark <i class="fa fa-long-arrow-right"></i></li>
+                    <li>Total Marks <i class="fa fa-long-arrow-right"></i></li>
+                    <li>Total Questions <i class="fa fa-long-arrow-right"></i></li>
+                    <li>Total Time <i class="fa fa-long-arrow-right"></i></li>
+                </ul>
+            </div>
+            <div class="col-xs-6">
+                <ul class="topic-detail right">
+                    <li>{{$quizzes->per_q_mark}}</li>
+                    <li>
+                        @php
+                        $qu_count = 0;
+                        @endphp
+                        @foreach($question as $questions)
+                        @if($questions->topic_id == $quizzes->id)
+                        @php
+                        $qu_count++;
+                        @endphp
+                        @endif
+                        @endforeach
+                        {{$quizzes->per_q_mark*$qu_count}}
+                    </li>
+                    <li>
+                        {{$qu_count}}
+                    </li>
+                    <li>
+                        {{$quizzes->timer}} minutes
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <a href="{{route('question.show', $quizzes->id)}}" class="btn btn-wave">Add Questions</a>
+        <a class="btn btn-danger">Delete Answer Sheet</a>
+    </div>
